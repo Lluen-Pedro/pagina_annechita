@@ -1,0 +1,181 @@
+:root {
+      --acento-1: #ff8fb8;   /* rosa claro */
+      --acento-2: #f7f2c0;   /* crema */
+      --texto: #ffffff;
+      --tinta: #1a1a1a;      /* negro del contorno */
+      --rosa-fondo: #e8789f; /* rosa del fondo */
+      --boton-fondo: #fff0f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--texto);
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
+      background: var(--rosa-fondo);
+    }
+
+    /* ============ FONDO ============ */
+    /* Pon tu foto en la misma carpeta con el nombre: fondo.jpg */
+    .fondo {
+      position: fixed;
+      inset: 0;
+      background:
+        url("resources/Gemini_Generated_Image_nswk4enswk4enswk.jpg") center / cover no-repeat,
+        linear-gradient(135deg, #f08bb2, #e8789f);
+      z-index: -3;
+      animation: zoom 5s ease-in-out infinite alternate;
+    }
+    @keyframes zoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.1); }
+    }
+
+    /* Capa de color que se mueve sobre la foto */
+    .capa {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(120deg,
+        rgba(232, 120, 159, 0.35),
+        rgba(247, 242, 192, 0.12),
+        rgba(150, 50, 100, 0.30));
+      background-size: 300% 300%;
+      animation: movimiento 14s ease infinite;
+    }
+    @keyframes movimiento {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Burbujas flotantes */
+    .burbujas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .burbujas span {
+      position: absolute;
+      bottom: -80px;
+      border-radius: 50%;
+      background: rgba(196, 16, 106, 0.15);
+      box-shadow: 0 0 20px rgba(196, 49, 196, 0.25);
+      animation: subir linear infinite;
+    }
+    @keyframes subir {
+      0%   { transform: translateY(0) scale(1); opacity: 0; }
+      10%  { opacity: 1; }
+      100% { transform: translateY(-115vh) scale(1.4); opacity: 0; }
+    }
+
+    /* ============ CONTENIDO ============ */
+    .contenedor {
+      width: 100%;
+      max-width: 460px;
+      padding: 48px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .perfil { text-align: center; margin-bottom: 28px; animation: entrar 0.9s ease both; }
+
+    .avatar {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--acento-1), var(--acento-2));
+      animation: pulso 3s ease-in-out infinite;
+    }
+    .avatar .interior {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--boton-fondo);
+      color: var(--tinta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    @keyframes pulso {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 143, 184, 0.7); }
+      50%      { box-shadow: 0 0 0 16px rgba(255, 143, 184, 0); }
+    }
+
+    .perfil h1 { font-size: 1.5rem; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,.4); }
+    .perfil p  { margin-top: 8px; font-size: 0.95rem; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+
+    /* ============ BOTONES ============ */
+    .enlaces { width: 100%; display: flex; flex-direction: column; gap: 14px; }
+
+    .boton {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--tinta);
+      font-weight: 700;
+      font-size: 1rem;
+      background: var(--boton-fondo);
+      border: 2.5px solid var(--tinta);
+      box-shadow: 0 4px 0 var(--tinta);
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      opacity: 0;
+      animation: entrar 0.7s ease forwards;
+    }
+    .boton:nth-child(1) { animation-delay: 0.3s; }
+    .boton:nth-child(2) { animation-delay: 0.45s; }
+    .boton:nth-child(3) { animation-delay: 0.6s; }
+    .boton:nth-child(4) { animation-delay: 0.75s; }
+    .boton:nth-child(5) { animation-delay: 0.9s; }
+
+    .boton:hover, .boton:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      background: var(--acento-2);
+      box-shadow: 0 7px 0 var(--tinta);
+      outline: none;
+    }
+    .boton:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--tinta); }
+
+    .boton svg { width: 26px; height: 26px; flex-shrink: 0; fill: currentColor; }
+    .boton .texto { flex: 1; }
+    .boton .flecha { opacity: 0.6; font-size: 1.2rem; transition: transform 0.25s; }
+    .boton:hover .flecha { transform: translateX(4px); opacity: 1; }
+
+    @keyframes entrar {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ COPYRIGHT ============ */
+    footer {
+      margin-top: auto;         
+      padding-top: 40px;
+      font-size: 0.8rem;
+      opacity: 0.75;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0,0,0,.5);
+    }
+
+    /* Respeta a quien prefiere menos animaciones */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .boton { opacity: 1; }
+    }
