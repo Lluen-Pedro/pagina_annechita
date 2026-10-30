@@ -65,8 +65,8 @@
       position: absolute;
       bottom: -80px;
       border-radius: 50%;
-      background: rgba(196, 16, 106, 0.15);
-      box-shadow: 0 0 20px rgba(196, 49, 196, 0.25);
+      background: rgba(231, 17, 124, 0.15);
+      box-shadow: 0 5 20px rgba(190, 15, 190, 0.25);
       animation: subir linear infinite;
     }
     @keyframes subir {
